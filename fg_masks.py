@@ -15,7 +15,7 @@ def mask_353(en_shape,en_wcs,intensity_cutoff=None,area_cutoff=None,
     :param return_healpix: if set to True, will return both enmap mask and original HEALPix mask.
     """
     #Read 353 and compute polarized intensity
-    hp_tqu=np.array(hp.read_map(fname_353,field=[0,1,2]))
+    hp_tqu=np.array(hp.read_map(fname_353,field=[0,1,2],verbose=False))
     hp_p=np.sqrt(hp_tqu[1]**2+hp_tqu[2]**2);
 
     #Set intensity cutoff (as a fraction of maximum intensity)
@@ -50,6 +50,3 @@ def mask_353(en_shape,en_wcs,intensity_cutoff=None,area_cutoff=None,
     else :
         return en_mask
 
-box=np.deg2rad([[-1.,13.47],[1.,17.47]])
-map_en=enmap.read_map("/project/projectdirs/act/data/xlink/deep56_forecast_180223_master_apo_w0.fits",box=box)
-mask_353(map_en.shape,map_en.wcs,area_cutoff=0.5)
